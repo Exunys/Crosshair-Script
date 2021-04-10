@@ -45,6 +45,7 @@ local VerticalLine = Drawing.new("Line")
 
 _G.SendNotifications = true   -- If set to true then the script would notify you frequently on any changes applied and when loaded / errored. (If a game can detect this, it is recommended to set it to false)
 _G.DefaultSettings = false   -- If set to true then the script would create a crosshair with the default settings regardless of any changes.
+_G.ToMouse = false   -- If set to true then the crosshair will be positioned to your mouse cursor's position. If set to false it will be positioned to the center of your screen.
 
 _G.CrosshairVisible = true   -- If set to true then the crosshair would be visible and vice versa.
 _G.CrosshairSize = 20   -- The size of the crosshair.
@@ -61,15 +62,25 @@ RunService.RenderStepped:Connect(function()
     HorizontalLine.Thickness = _G.CrosshairThickness
     HorizontalLine.Visible = _G.CrosshairVisible
     HorizontalLine.Transparency = _G.CrosshairTransparency
-    HorizontalLine.From = Vector2.new(Axis_X - Real_Size, Axis_Y)
-    HorizontalLine.To = Vector2.new(Axis_X + Real_Size, Axis_Y)
-
+    
     VerticalLine.Color = _G.CrosshairColor
     VerticalLine.Thickness = _G.CrosshairThickness
     VerticalLine.Visible = _G.CrosshairVisible
     VerticalLine.Transparency = _G.CrosshairTransparency
-    VerticalLine.From = Vector2.new(Axis_X, Axis_Y - Real_Size)
-    VerticalLine.To = Vector2.new(Axis_X, Axis_Y + Real_Size)
+    
+    if _G.ToMouse == true then
+        HorizontalLine.From = Vector2.new(UserInputService:GetMouseLocation().X - Real_Size, UserInputService:GetMouseLocation().Y)
+        HorizontalLine.To = Vector2.new(UserInputService:GetMouseLocation().X + Real_Size, UserInputService:GetMouseLocation().Y)
+        
+        VerticalLine.From = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y - Real_Size)
+        VerticalLine.To = Vector2.new(UserInputService:GetMouseLocation().X, UserInputService:GetMouseLocation().Y + Real_Size)
+    elseif _G.ToMouse == false then
+        HorizontalLine.From = Vector2.new(Axis_X - Real_Size, Axis_Y)
+        HorizontalLine.To = Vector2.new(Axis_X + Real_Size, Axis_Y)
+    
+        VerticalLine.From = Vector2.new(Axis_X, Axis_Y - Real_Size)
+        VerticalLine.To = Vector2.new(Axis_X, Axis_Y + Real_Size)
+    end
 end)
 
 if _G.DefaultSettings == true then
