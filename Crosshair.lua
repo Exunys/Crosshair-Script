@@ -1,14 +1,3 @@
---[[
-
-		██╗░░░██╗██████╗░██╗░█████╗░░█████╗░░██████╗████████╗
-		██║░░░██║██╔══██╗██║██╔══██╗██╔══██╗██╔════╝╚══██╔══╝
-		██║░░░██║██████╦╝██║██║░░╚═╝███████║╚█████╗░░░░██║░░░
-		██║░░░██║██╔══██╗██║██║░░██╗██╔══██║░╚═══██╗░░░██║░░░
-		╚██████╔╝██████╦╝██║╚█████╔╝██║░░██║██████╔╝░░░██║░░░
-		░╚═════╝░╚═════╝░╚═╝░╚════╝░╚═╝░░╚═╝╚═════╝░░░░╚═╝░░░
-
-]]
-
 local function API_Check()
     if Drawing == nil then
         return "No"
@@ -21,7 +10,7 @@ local Find_Required = API_Check()
 
 if Find_Required == "No" then
     game:GetService("StarterGui"):SetCore("SendNotification",{
-        Title = "Ubicast Developer";
+        Title = "Exunys Developer";
         Text = "Crosshair script could not be loaded because your exploit is unsupported.";
         Duration = math.huge;
         Button1 = "OK"
@@ -106,7 +95,7 @@ UserInputService.InputBegan:Connect(function(Input)
         
         if _G.SendNotifications == true then
             game:GetService("StarterGui"):SetCore("SendNotification",{
-                Title = "Ubicast Developer";
+                Title = "Exunys Developer";
                 Text = "The crosshair's visibility is now set to "..tostring(_G.CrosshairVisible)..".";
                 Duration = 5;
             })
